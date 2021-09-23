@@ -1,4 +1,4 @@
 other/
-frontend/node_modules
-frontend/package-lock.json
+frontend/client/node_modules
+frontend/client/package-lock.json
 .vscode/
