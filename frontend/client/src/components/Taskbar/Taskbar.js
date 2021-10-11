@@ -10,6 +10,7 @@ class Taskbar extends Component {
       height: 50,
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight,
+      activatedApps: this.apps.filter(() => Math.random() > 0.5),
     };
   }
 
@@ -26,15 +27,30 @@ class Taskbar extends Component {
     this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
   }
 
+  get apps() {
+    return ["a", "b", "c", "d", "e"]
+  }
+
+  toggleAppActivation = (app) => {
+    let activatedApps = Array.from(this.state.activatedApps);
+
+    if (activatedApps.includes(app)) {
+      activatedApps.splice(activatedApps.indexOf(app), 1);
+    } else {
+      activatedApps.push(app);
+    }
+
+    this.setState({ activatedApps });
+  }
+
   render() {
     return (
-    // <div className="taskbar" style={{ height: this.state.height, width: this.state.windowWidth}}/>
     <div className="taskbar">
-      <Dock className="dock" backgroundClassName="dock-background" width={800} debug={true} magnification={0.8} magnifyDirection="up">
-        {["a", "b", "c", "d", "e"].map((item, index) => (
-          <Dock.Item className="dock-item" key={index} onClick={() => console.log(item)}>
-            <img src={`/${item}.png`} alt=""/>
-            <div className="active-indicator"/>
+      <Dock className="dock" backgroundClassName="dock-background" width={Math.min(this.apps.length * 80, window.innerWidth * 0.5)} debug={false} magnification={0.8} magnifyDirection="up">
+        {this.apps.map((app, index) => (
+          <Dock.Item className="dock-item" key={index} onClick={() => this.toggleAppActivation(app)}>
+            <img src={`/${app}.png`} alt=""/>
+            <span className="active-indicator" style={{ opacity: this.state.activatedApps.includes(app) ? 1 : 0 }} />
           </Dock.Item>
         ))}
       </Dock>
