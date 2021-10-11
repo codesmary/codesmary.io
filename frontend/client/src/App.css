@@ -1,21 +1,10 @@
-.App{
+.App {
   height: 100%;
   width: 100%;
-}
-
-.drag{
-  width: 500px;
-  height: 300px;
   display: flex;
   flex-direction: column;
 }
 
-.handle{
-  border: solid black;
-}
-
-.window-view{
-  border: solid black;
-  height: auto;
-  flex-grow: 1;
+.main-content {
+  flex: 1;
 }

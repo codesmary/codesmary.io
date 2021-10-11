@@ -37,5 +37,6 @@
   },
   "devDependencies": {
     "react-draggable": "^4.4.4",
+    "react-osx-dock": "^1.0.0"
   }
 }
