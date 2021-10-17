@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="main-content">
-          <Window x={600} y={250} width={600} height={400}/>
+          <Window x={900} y={175} width={600} height={400}/>
         </div>
         <div className="footer">
           <Taskbar/>

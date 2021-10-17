@@ -13,6 +13,8 @@ class Window extends Component {
       height: props.height,
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight,
+      shrink: false,
+      close: false,
     };
   }
 
@@ -39,7 +41,15 @@ class Window extends Component {
         defaultPosition={{ x: x, y: y }}
         bounds={{ left: 0, top: 0, right: windowWidth - width, bottom: windowHeight - height}}>
         <div style={{ height: height, width: width}}>
-          <div className="handle">Drag from here</div>
+          <div className="handle">
+            <div className="handle-text">A window</div>
+            <div className="handle-shrink" onClick={()=>{
+              this.setState({shrink: true});
+            }}/>
+            <div className="handle-close" onClick={()=>{
+              this.setState({close: true});
+            }}/>
+          </div>
           <div className="window-view">{x}    {y}</div>
         </div>
       </Draggable>
