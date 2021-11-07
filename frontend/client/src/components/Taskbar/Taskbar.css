@@ -4,27 +4,5 @@
   width: 100%;
   background-color: #f7b9dd;
   height: 50px;
-}
-
-.dock .dock-item {
-  cursor: pointer;
-  padding: 6px 0px 3px 0px;
-}
-
-.dock .dock-item img {
-  height: calc(100% - 4px - 2px);
-}
-
-.dock .dock-item .active-indicator {
-  width: 4px;
-  height: 4px;
-  margin-top: 2px;
-  background-color: #444;
-  border-radius: 50%;
-}
-
-.dock .dock-background {
-  background-color: #f7b9dd;
-  border-radius: 4px 4px 0px 0px;
-  box-shadow: 1px 1px 50px 4px rgba(0, 0, 0, 0.4);
+  border-top: solid rgba(0, 0, 0, 0.4) 0.1px;
 }

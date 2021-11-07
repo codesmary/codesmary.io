@@ -8,19 +8,21 @@ class Taskbar extends Component {
     let today = new Date();
 
     this.state = {
-      minimizedWindows: {},
+      windows: this.props.windows,
       time: today.getHours() + ":" + today.getMinutes()
     };
   }
 
-  get apps() {
-    return ["a", "b", "c", "d", "e"]
-  }
-
-  render() {
+  render() {  
     return (
     <div className="taskbar">
-      {this.state.time}
+      <div className="apps">
+        {this.props.windows.filter(window => window.props.shrink).map(window => window.props.keyProp)}
+      </div>
+      <div className="spacer" style={{width: "50px"}}/>
+      <div className="time">
+        {this.state.time}
+      </div>
     </div>
     );
   }

@@ -13,8 +13,8 @@ class Window extends Component {
       height: props.height,
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight,
-      shrink: false,
-      close: false,
+      shrink: props.shrink,
+      close: props.close,
     };
   }
 
@@ -45,9 +45,11 @@ class Window extends Component {
             <div className="handle-text">A window</div>
             <div className="handle-shrink" onClick={()=>{
               this.setState({shrink: true});
+              this.props.onWindowChanged(this.props.keyProp, true, this.state.close);
             }}/>
             <div className="handle-close" onClick={()=>{
               this.setState({close: true});
+              this.props.onWindowChanged(this.props.keyProp, this.state.shrink, true);
             }}/>
           </div>
           <div className="window-view">{x}    {y}</div>
