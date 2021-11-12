@@ -42,17 +42,18 @@ class Window extends Component {
         bounds={{ left: 0, top: 0, right: windowWidth - width, bottom: windowHeight - height}}>
         <div style={{ height: height, width: width}}>
           <div className="handle">
-            <div className="handle-text">A window</div>
+            <div className="handle-text">{this.props.keyProp}</div>
             <div className="handle-shrink" onClick={()=>{
               this.setState({shrink: true});
               this.props.onWindowChanged(this.props.keyProp, true, this.state.close);
-            }}/>
+            }}>
+            </div>
             <div className="handle-close" onClick={()=>{
               this.setState({close: true});
               this.props.onWindowChanged(this.props.keyProp, this.state.shrink, true);
             }}/>
           </div>
-          <div className="window-view">{x}    {y}</div>
+          <div className="window-view"></div>
         </div>
       </Draggable>
     );
