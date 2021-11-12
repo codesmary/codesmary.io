@@ -60,7 +60,7 @@ class App extends Component {
     let windows = this.state.windows;
 
     if(!shrink){
-      windows.map(window => {
+      windows = windows.map(window => {
         if(window.props.keyProp === key){
           return React.cloneElement(
             window, 
@@ -71,7 +71,7 @@ class App extends Component {
         }
       })
     }
-
+    
     let taskbar = React.cloneElement(
       this.state.taskbar, 
       { windows: windows }

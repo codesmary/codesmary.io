@@ -40,7 +40,6 @@ class Taskbar extends Component {
           (window, index) => 
           <div key={"app" + index} className="app" onClick={()=>{
             this.props.onTaskbarChanged(window.props.keyProp, false);
-            console.log("shrink is false")
           }}>
             {window.props.keyProp}
           </div>
