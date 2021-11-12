@@ -9,15 +9,43 @@ class Taskbar extends Component {
 
     this.state = {
       windows: this.props.windows,
-      time: today.getHours() + ":" + today.getMinutes()
+      time: today.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
     };
   }
 
-  render() {  
+  componentDidMount() {
+    this.intervalID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
+  }
+
+  tick = () => {
+    let today = new Date();
+
+    this.setState({
+      time: today.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+    });
+  }
+
+  render() {
     return (
     <div className="taskbar">
       <div className="apps">
-        {this.props.windows.filter(window => window.props.shrink).map(window => window.props.keyProp)}
+        {this.props.windows.filter(window => window.props.shrink).map(
+          (window, index) => 
+          <div key={"app" + index} className="app" onClick={()=>{
+            this.props.onTaskbarChanged(window.props.keyProp, false);
+            console.log("shrink is false")
+          }}>
+            {window.props.keyProp}
+          </div>
+          )
+        }
       </div>
       <div className="spacer" style={{width: "50px"}}/>
       <div className="time">

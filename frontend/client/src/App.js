@@ -7,13 +7,16 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    let windows = [<Window key="main-window" keyProp="main-window" x={900} y={175} width={600} height={400} shrink={false} close={false} onWindowChanged={this.onWindowChange}/>];
+    let windows = [
+      <Window key="main-window" keyProp="main-window" x={400} y={75} width={600} height={400} shrink={false} close={false} onWindowChanged={this.onWindowChange}/>, 
+      <Window key="second-window" keyProp="second-window" x={1200} y={175} width={600} height={400} shrink={false} close={false} onWindowChanged={this.onWindowChange}/>
+    ];
 
     this.state = { 
       windows: windows,
       taskbar: <Taskbar 
         windows={windows} 
-        // onWindowsChanged={this.onWindowsChanged}
+        onTaskbarChanged={this.onTaskbarChange}
       />
     };
   }
@@ -22,15 +25,25 @@ class App extends Component {
     let windows = this.state.windows;
     
     if(shrink){
-      windows = windows.map(window => {
+      let newWindows = [];
+      let savedWindow = null;
+
+      windows.forEach(window => {
         if(window.props.keyProp === key){
-          return React.cloneElement(
+          savedWindow = React.cloneElement(
             window, 
             { shrink: shrink, close: close }
-          );
+          )
+        }else{
+          newWindows.push(window);
         }
-        return window;
       })
+
+      if(savedWindow){
+        newWindows.push(savedWindow);
+      }
+
+      windows = newWindows;
     }else if(close){
       windows = windows.filter(window => window.props.keyProp !== key);
     }
@@ -43,20 +56,40 @@ class App extends Component {
     this.setState({windows: windows, taskbar: taskbar});
   }
 
-  // onWindowsChanged = (newWindows) => {
-  //   this.setState({windows: newWindows});
-  // }
+  onTaskbarChange = (key, shrink) => {
+    let windows = this.state.windows;
+
+    if(!shrink){
+      windows.map(window => {
+        if(window.props.keyProp === key){
+          return React.cloneElement(
+            window, 
+            { shrink: shrink }
+          );
+        }else{
+          return window;
+        }
+      })
+    }
+
+    let taskbar = React.cloneElement(
+      this.state.taskbar, 
+      { windows: windows }
+    );
+    
+    this.setState({windows: windows, taskbar: taskbar});
+  }
 
   render(){
-    // const { windows, taskbar } = this.state;
+    const { windows, taskbar } = this.state;
 
     return (
       <div className="App">
         <div className="main-content">
-          {this.state.windows.filter(window => !window.props.shrink)}
+          {windows.filter(window => !window.props.shrink)}
         </div>
         <div className="footer">
-          {this.state.taskbar}
+          {taskbar}
         </div>
       </div>
     );
