@@ -44,7 +44,7 @@ class Taskbar extends Component {
 
       if(apps.length){
         return apps.reduce((prev, curr) =>
-          prev.concat(curr, <img className="taskbar-line" src={"./pixel_art/taskbar-line-large.png"} height="60px" draggable={false} alt="Pixelized taskbar line"/>), [<img className="taskbar-line" src={"./pixel_art/taskbar-line-large.png"} height="60px" draggable={false} alt="Pixelized taskbar line"/>]
+          prev.concat(curr, <img key={"taskbar-line-" + curr.key} className="taskbar-line" src={"./pixel_art/taskbar-line-large.png"} height="60px" draggable={false} alt="Pixelized taskbar line"/>), [<img key={"taskbar-line"} className="taskbar-line" src={"./pixel_art/taskbar-line-large.png"} height="60px" draggable={false} alt="Pixelized taskbar line"/>]
         );
       }
       

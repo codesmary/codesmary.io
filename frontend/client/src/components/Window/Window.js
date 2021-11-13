@@ -31,6 +31,11 @@ class Window extends Component {
     this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
   }
 
+  handleOnStop = (evt, data) => {
+    const { x, y } = data;
+    this.setState({x: x, y: y});
+  }
+
   render() {
     let { x, y, width, height, windowWidth, windowHeight } = this.state;
 
@@ -39,13 +44,14 @@ class Window extends Component {
         defaultClassName="drag"
         handle=".handle"
         defaultPosition={{ x: x, y: y }}
-        bounds={{ left: 0, top: 0, right: windowWidth - width, bottom: windowHeight - height}}>
+        bounds={{ left: 0, top: 0, right: windowWidth - width, bottom: windowHeight - height}}
+        onStop={this.handleOnStop}>
         <div style={{width: width}}>
             <img className="handle" src={"./pixel_art/window-grabbable-skinnier-large.png"} width="600px" draggable={false} alt="Pixelized window handle"/>
             <div className="handle-text">{this.props.keyProp}</div>
             <img className="handle-shrink" src={"./pixel_art/yellow-button-small-large.png"} width="30px" draggable={false} alt="Pixelized minimize button" onClick={()=>{
               this.setState({shrink: true});
-              this.props.onWindowChanged(this.props.keyProp, true, this.state.close);
+              this.props.onWindowChanged(this.props.keyProp, true, this.state.close, this.state.x, this.state.y);
             }}/>
             <img className="handle-close" src={"./pixel_art/red-button-small-large.png"} width="30px" draggable={false} alt="Pixelized close button" onClick={()=>{
               this.setState({close: true});

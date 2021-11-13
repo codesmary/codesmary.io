@@ -21,7 +21,7 @@ class App extends Component {
     };
   }
 
-  onWindowChange = (key, shrink, close) => {
+  onWindowChange = (key, shrink, close, x = 0, y = 0) => {
     let windows = this.state.windows;
     
     if(shrink){
@@ -32,7 +32,7 @@ class App extends Component {
         if(window.props.keyProp === key){
           savedWindow = React.cloneElement(
             window, 
-            { shrink: shrink, close: close }
+            { shrink: shrink, close: close, x: x, y: y }
           )
         }else{
           newWindows.push(window);
