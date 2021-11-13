@@ -32,24 +32,37 @@ class Taskbar extends Component {
     });
   }
 
+  renderApps = () => {
+    let apps = this.props.windows.filter(window => window.props.shrink).map(
+      (window, index) => 
+        <div key={"app" + index} className="app" style={{height: "60px"}} onClick={()=>{
+          this.props.onTaskbarChanged(window.props.keyProp, false);
+        }}>
+          {window.props.keyProp}
+        </div>
+      );
+
+      if(apps.length){
+        return apps.reduce((prev, curr) =>
+          prev.concat(curr, <img className="taskbar-line" src={"./pixel_art/taskbar-line-large.png"} height="60px" draggable={false} alt="Pixelized taskbar line"/>), [<img className="taskbar-line" src={"./pixel_art/taskbar-line-large.png"} height="60px" draggable={false} alt="Pixelized taskbar line"/>]
+        );
+      }
+      
+      return <img className="taskbar-line" src={"./pixel_art/taskbar-line-large.png"} height="60px" draggable={false} alt="Pixelized taskbar line"/>;
+  }
+
   render() {
     return (
     <div className="taskbar">
+      <img className="taskbar-img" src={"./pixel_art/taskbar-large.png"} width={window.innerWidth} height="60px" draggable={false} alt="Pixelized taskbar"/>
       <div className="apps">
-        {this.props.windows.filter(window => window.props.shrink).map(
-          (window, index) => 
-          <div key={"app" + index} className="app" onClick={()=>{
-            this.props.onTaskbarChanged(window.props.keyProp, false);
-          }}>
-            {window.props.keyProp}
-          </div>
-          )
-        }
+        {this.renderApps()}
       </div>
-      <div className="spacer" style={{width: "50px"}}/>
+      <img className="taskbar-line before-clock" src={"./pixel_art/taskbar-line-large.png"} height="60px" draggable={false} alt="Pixelized taskbar line"/>
       <div className="time">
         {this.state.time}
       </div>
+      <img className="taskbar-line" src={"./pixel_art/taskbar-line-large.png"} height="60px" draggable={false} alt="Pixelized taskbar line"/>
     </div>
     );
   }
