@@ -88,6 +88,9 @@ class App extends Component {
         <div className="main-content">
           {windows.filter(window => !window.props.shrink)}
         </div>
+        <div className="apps">
+          <img className="about-me app" src={"./pixel_art/profile-pic-2-large.png"} width="80px" style={{padding: "10px"}} draggable={false} alt="Pixelized Rosemary"/>
+        </div>
         <div className="footer">
           {taskbar}
         </div>
