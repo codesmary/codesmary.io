@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
+import WindowContent from './WindowContent/WindowContent';
 import './Window.css';
 
 class Window extends Component {
@@ -14,7 +15,7 @@ class Window extends Component {
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight,
       shrink: props.shrink,
-      close: props.close,
+      close: props.close
     };
   }
 
@@ -38,6 +39,7 @@ class Window extends Component {
 
   render() {
     let { x, y, width, height, windowWidth, windowHeight } = this.state;
+    let buttonSize = 30;
 
     return (
       <Draggable
@@ -47,17 +49,19 @@ class Window extends Component {
         bounds={{ left: 0, top: 0, right: windowWidth - width, bottom: windowHeight - height}}
         onStop={this.handleOnStop}>
         <div style={{width: width}}>
-            <img className="handle" src={"./pixel_art/window-grabbable-skinnier-large.png"} width="600px" draggable={false} alt="Pixelized window handle"/>
+            <img className="handle" src={"./pixel_art/window-grabbable-skinnier-large.png"} width={width} draggable={false} alt="Pixelized window handle"/>
             <div className="handle-text">{this.props.keyProp}</div>
-            <img className="handle-shrink" src={"./pixel_art/yellow-button-small-large.png"} width="30px" draggable={false} alt="Pixelized minimize button" onClick={()=>{
+            <img className="handle-shrink" src={"./pixel_art/yellow-button-small-large.png"} width={buttonSize} draggable={false} alt="Pixelized minimize button" onClick={()=>{
               this.setState({shrink: true});
               this.props.onWindowChanged(this.props.keyProp, true, this.state.close, this.state.x, this.state.y);
+              console.log(this.state.x, this.state.y);
             }}/>
-            <img className="handle-close" src={"./pixel_art/red-button-small-large.png"} width="30px" draggable={false} alt="Pixelized close button" onClick={()=>{
+            <img className="handle-close" src={"./pixel_art/red-button-small-large.png"} width={buttonSize} draggable={false} alt="Pixelized close button" onClick={()=>{
               this.setState({close: true});
               this.props.onWindowChanged(this.props.keyProp, this.state.shrink, true);
             }}/>
-          <img className="window-view" src={"./pixel_art/window-box-updated-large.png"} width="600px" draggable={false} alt="Pixelized window"/>
+            <img className="window-view" src={"./pixel_art/window-boxes/window-box-bio-large.png"} width={width} draggable={false} alt="Pixelized window"/>
+            <WindowContent layout={this.props.layout} content={this.props.content} width={width-27} height={322}/>
         </div>
       </Draggable>
     );

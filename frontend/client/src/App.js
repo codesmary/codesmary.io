@@ -8,8 +8,8 @@ class App extends Component {
     super(props);
 
     let windows = [
-      <Window key="main-window" keyProp="main-window" x={400} y={75} width={600} height={400} shrink={false} close={false} onWindowChanged={this.onWindowChange}/>, 
-      <Window key="second-window" keyProp="second-window" x={1200} y={175} width={600} height={400} shrink={false} close={false} onWindowChanged={this.onWindowChange}/>
+      <Window key="about-me" keyProp="about-me" layout="text-only" content="bio" x={1064} y={140} width={600} height={400} shrink={false} close={false} onWindowChanged={this.onWindowChange}/>, 
+      // <Window key="second-window" keyProp="second-window" x={1200} y={175} width={600} height={400} shrink={false} close={false} onWindowChanged={this.onWindowChange}/>
     ];
 
     this.state = { 
@@ -89,7 +89,7 @@ class App extends Component {
           {windows.filter(window => !window.props.shrink)}
         </div>
         <div className="apps">
-          <img className="about-me app" src={"./pixel_art/profile-pic-2-large.png"} width="80px" style={{padding: "10px"}} draggable={false} alt="Pixelized Rosemary"/>
+          <img className="about-me app" src={"./pixel_art/profile-pic-2-xlarge.png"} width="80px" style={{padding: "10px"}} draggable={false} alt="Pixelized Rosemary"/>
         </div>
         <div className="footer">
           {taskbar}

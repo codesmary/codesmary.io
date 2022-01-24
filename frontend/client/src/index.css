@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: "PixelFont", sans-serif;
+  font-family: "Minecraft", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #cdd2fa;
@@ -17,6 +17,6 @@ code {
 }
 
 @font-face {
-  font-family: "PixelFont";
-  src: url("./fonts/04B_03__/04B_03__.ttf") format("truetype");
+  font-family: "Minecraft";
+  src: url("./fonts/Minecraftia-Regular.ttf") format("truetype");
 }

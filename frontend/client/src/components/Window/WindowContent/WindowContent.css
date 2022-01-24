@@ -1,0 +1,10 @@
+.window-content {
+  position: absolute;
+  top: 60px;
+  text-overflow: ellipsis;
+  hyphens: auto;
+  line-height: 1.3;
+  font-size: 15px;
+  align-self: center;
+  transform: translateX(5px);
+}
